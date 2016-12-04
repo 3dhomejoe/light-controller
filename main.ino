@@ -2,6 +2,7 @@
 // constants won't change. Used here to set a pin number :
 const int starttime = 100;  // the amount of time that each delay is going to
                             // have on the startup script.
+const int NUM_OUTPUTS = 14;
 long randstatus;
 long randNumber;
 long NumberCounter;  // This is a counter to count how may times the program has
@@ -22,6 +23,7 @@ int ledState11 = LOW;  // ledState used to set the LED
 int ledState12 = LOW;  // ledState used to set the LED
 int ledState13 = LOW;  // ledState used to set the LED
 
+/* Disabling for array usage below
 // Set what pins are enabled. (Low = Off, High = On)
 int ledEnabled0 = LOW;
 int ledEnabled1 = LOW;
@@ -37,6 +39,13 @@ int ledEnabled10 = HIGH;
 int ledEnabled11 = LOW;
 int ledEnabled12 = LOW;
 int ledEnabled13 = LOW;
+*/
+
+int ledEnabled[NUM_OUTPUTS] = {LOW};
+ledEnabled[8] = HIGH;
+ledEnabled[9] = HIGH;
+ledEnabled[10] = HIGH;
+
 
 // Generally, you should use "unsigned long" for variables that hold time
 // The value will quickly become too large for an int to store
@@ -116,7 +125,7 @@ void RandomLight() {
                                  // on/off. Add 1 to your final number. Eg. 13
                                  // pins would be a total of 14.
 
-    if ((randNumber == 0) && (ledEnabled0 == HIGH)) {
+    if ((randNumber == 0) && (ledEnabled[0] == HIGH)) {
       randstatus = 1;
       if (ledState0 == LOW) {
         ledState0 = HIGH;
@@ -126,7 +135,7 @@ void RandomLight() {
       digitalWrite(0, ledState0);
     }
 
-    if ((randNumber == 1) && (ledEnabled1 == HIGH)) {
+    if ((randNumber == 1) && (ledEnabled[1] == HIGH)) {
       randstatus = 1;
       if (ledState1 == LOW) {
         ledState1 = HIGH;
@@ -136,7 +145,7 @@ void RandomLight() {
       digitalWrite(1, ledState1);
     }
 
-    if ((randNumber == 2) && (ledEnabled2 == HIGH)) {
+    if ((randNumber == 2) && (ledEnabled[2] == HIGH)) {
       randstatus = 1;
       if (ledState2 == LOW) {
         ledState2 = HIGH;
@@ -146,7 +155,7 @@ void RandomLight() {
       digitalWrite(2, ledState2);
     }
 
-    if ((randNumber == 3) && (ledEnabled3 == HIGH)) {
+    if ((randNumber == 3) && (ledEnabled[3] == HIGH)) {
       randstatus = 1;
       if (ledState3 == LOW) {
         ledState3 = HIGH;
@@ -156,7 +165,7 @@ void RandomLight() {
       digitalWrite(3, ledState3);
     }
 
-    if ((randNumber == 4) && (ledEnabled4 == HIGH)) {
+    if ((randNumber == 4) && (ledEnabled[4] == HIGH)) {
       randstatus = 1;
       if (ledState4 == LOW) {
         ledState4 = HIGH;
@@ -166,7 +175,7 @@ void RandomLight() {
       digitalWrite(4, ledState4);
     }
 
-    if ((randNumber == 5) && (ledEnabled5 == HIGH)) {
+    if ((randNumber == 5) && (ledEnabled[5] == HIGH)) {
       randstatus = 1;
       if (ledState5 == LOW) {
         ledState5 = HIGH;
@@ -176,7 +185,7 @@ void RandomLight() {
       digitalWrite(5, ledState5);
     }
 
-    if ((randNumber == 6) && (ledEnabled6 == HIGH)) {
+    if ((randNumber == 6) && (ledEnabled[6] == HIGH)) {
       randstatus = 1;
       if (ledState6 == LOW) {
         ledState6 = HIGH;
@@ -186,7 +195,7 @@ void RandomLight() {
       digitalWrite(6, ledState6);
     }
 
-    if ((randNumber == 7) && (ledEnabled7 == HIGH)) {
+    if ((randNumber == 7) && (ledEnabled[7] == HIGH)) {
       randstatus = 1;
       if (ledState7 == LOW) {
         ledState7 = HIGH;
@@ -196,7 +205,7 @@ void RandomLight() {
       digitalWrite(7, ledState7);
     }
 
-    if ((randNumber == 8) && (ledEnabled8 == HIGH)) {
+    if ((randNumber == 8) && (ledEnabled[8] == HIGH)) {
       randstatus = 1;
       if (ledState8 == LOW) {
         ledState8 = HIGH;
@@ -206,7 +215,7 @@ void RandomLight() {
       digitalWrite(8, ledState8);
     }
 
-    if ((randNumber == 9) && (ledEnabled9 == HIGH)) {
+    if ((randNumber == 9) && (ledEnabled[9] == HIGH)) {
       randstatus = 1;
       if (ledState9 == LOW) {
         ledState9 = HIGH;
@@ -216,7 +225,7 @@ void RandomLight() {
       digitalWrite(9, ledState9);
     }
 
-    if ((randNumber == 10) && (ledEnabled10 == HIGH)) {
+    if ((randNumber == 10) && (ledEnabled[10] == HIGH)) {
       randstatus = 1;
       if (ledState10 == LOW) {
         ledState10 = HIGH;
@@ -226,7 +235,7 @@ void RandomLight() {
       digitalWrite(10, ledState10);
     }
 
-    if ((randNumber == 11) && (ledEnabled11 == HIGH)) {
+    if ((randNumber == 11) && (ledEnabled[11] == HIGH)) {
       randstatus = 1;
       if (ledState11 == LOW) {
         ledState11 = HIGH;
@@ -236,7 +245,7 @@ void RandomLight() {
       digitalWrite(11, ledState11);
     }
 
-    if ((randNumber == 12) && (ledEnabled12 == HIGH)) {
+    if ((randNumber == 12) && (ledEnabled[12] == HIGH)) {
       randstatus = 1;
       if (ledState12 == LOW) {
         ledState12 = HIGH;
@@ -246,7 +255,7 @@ void RandomLight() {
       digitalWrite(12, ledState12);
     }
 
-    if ((randNumber == 13) && (ledEnabled13 == HIGH)) {
+    if ((randNumber == 13) && (ledEnabled[13] == HIGH)) {
       randstatus = 1;
       if (ledState13 == LOW) {
         ledState13 = HIGH;
@@ -261,6 +270,13 @@ void RandomLight() {
 
 void LightsOn()  // Turns all pins on.
 {
+  int i;
+  for(i = 0; i < NUM_OUTPUTS, i++) {
+    if (ledEnabled[i] == HIGH) {
+      digitalWrite(i, HIGH);
+    }
+  }
+  /*
   if (ledEnabled0 == HIGH) {
     digitalWrite(0, HIGH);
   }
@@ -303,10 +319,18 @@ void LightsOn()  // Turns all pins on.
   if (ledEnabled13 == HIGH) {
     digitalWrite(13, HIGH);
   }
+  */
 }
 
 void LightsOff()  // Turns all pins off
 {
+  int i;
+  for(i = 0; i < NUM_OUTPUTS, i++) {
+    if (ledEnabled[i] == HIGH) {
+      digitalWrite(i, LOW);
+    }
+  }
+  /*
   if (ledEnabled0 == HIGH) {
     digitalWrite(0, LOW);
   }
@@ -349,6 +373,7 @@ void LightsOff()  // Turns all pins off
   if (ledEnabled13 == HIGH) {
     digitalWrite(13, LOW);
   }
+  */
 }
 
 void Blink(int times, int delays)  // Times = how many times the outputs should
@@ -367,6 +392,14 @@ void Blink(int times, int delays)  // Times = how many times the outputs should
 void Chase(int delays, int type)  // Delays = How much of a delay between each
                                   // pin, type = High/Low for On/Off
 {
+  int i;
+  for(i = 0; i < NUM_OUTPUTS, i++) {
+    if (ledEnabled[i] == HIGH) {
+      digitalWrite(i, type);
+      delay(delays);
+    }
+  }
+  /*
   if (ledEnabled0 == HIGH) {
     digitalWrite(0, type);
     delay(delays);
@@ -423,4 +456,5 @@ void Chase(int delays, int type)  // Delays = How much of a delay between each
     digitalWrite(13, type);
     delay(delays);
   }
+  */
 }
